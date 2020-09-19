@@ -1,9 +1,21 @@
 import { createElement, render, Component } from './toy-react'
 
 class MC extends Component {
+    constructor () {
+        super()
+        this.state = {
+            a: 1,
+            b: 2,
+        }
+    }
     render () {
         return <div>
-            abcdeft
+            <span>{this.state.a}</span>
+            <button onClick={()=>{
+                console.log('clicked')
+                this.state.a ++;
+                this.reRender()
+            }}>添加</button>
             {this.children}
         </div>
     }
