@@ -11,13 +11,23 @@ export class Component {
     get vdom () {
         return this.render().vdom
     }
-    setAttribute(key, value) {
+    setAttribute (key, value) {
         this.props[key] = value
     }
-    appendChild(child) {
+    appendChild (child) {
         this.children.push(child)
     }
-    reRender() {
+    setState (state) {
+        const merge = (oldState, newState) => {
+            for (const key in newState) {
+                if (null == oldState[key] || typeof oldState[key] !== 'object' || null == newState[key] || typeof newState[key] !== 'object') {
+                    oldState[key] = newState[key]
+                    continue
+                }
+                merge(oldState[key], newState)
+            }
+        }
+        merge(this.state, state)
         this[RENDER_TO_DOM](this._range)
     }
     [RENDER_TO_DOM] (range) {

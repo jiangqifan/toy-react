@@ -12,9 +12,7 @@ class MC extends Component {
         return <div>
             <span>{this.state.a}</span>
             <button onClick={()=>{
-                console.log('clicked')
-                this.state.a ++;
-                this.reRender()
+                this.setState({ a: this.state.a+1 })
             }}>添加</button>
             {this.children}
         </div>
